@@ -11,11 +11,15 @@ class BaseCharacter:
     
     def stats(self) -> dict:
         return {
-            "level": self.level,
-            "attack": self.attack,
-            "health": self.health,
-            "armor": self.armor,
+            "Level": self.level,
+            "Attack": self.attack,
+            "Health": self.health,
+            "Armor": self.armor,
         }
+    
+    def _validate_negative_value(self, value, field):
+        if value < 0:
+            raise ValueError(f"{field} cannot be negative")
 
     @property
     def name(self):
@@ -36,10 +40,6 @@ class BaseCharacter:
     def armor(self):
         return self._armor
     
-    def _validate_negative_value(self, value, field):
-        if value < 0:
-            raise ValueError(f"{field} cannot be negative")
-    
     @level.setter
     def level(self, value):
         self._validate_negative_value(value, "Level")
@@ -59,4 +59,12 @@ class BaseCharacter:
 
 class Peasant(BaseCharacter):
     def __init__(self, name):
-        self._name = name
+        super().__init__(name, "Peasant")
+
+class Knight(BaseCharacter):
+    def __init__(self, name):
+        super().__init__(name, "Knight")
+
+class Warrior(BaseCharacter):
+    def __init__(self, name):
+        super().__init__(name, "Warrior")
