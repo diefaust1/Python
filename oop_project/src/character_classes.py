@@ -4,10 +4,10 @@ class BaseCharacter:
         self._name = name
         self._char_class = char_class
         
-        self.level = 0
-        self.attack = 5
-        self.health = 50
-        self.armor = 2
+        self._level = 0
+        self._attack = 5
+        self._health = 50
+        self._armor = 2
     
     def stats(self) -> dict:
         return {
