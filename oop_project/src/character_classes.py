@@ -1,17 +1,20 @@
 class BaseCharacter:
 
-    def __init__(self, name, char_class):
-        self._name = name
-        self._char_class = char_class
+    def __init__(self, name: str, char_class: str):
+        self._name: str = name
+        self._char_class: str = char_class
         
-        self._level = 0
-        self._attack = 5
-        self._health = 50
-        self._armor = 2
+        self.level: int = 0
+        self.exp: int = 0
+        self.max_exp: int = 0
+        self.attack: int = 0
+        self.health: int = 0
+        self.armor: int = 0
     
     def stats(self) -> dict:
         return {
             "Level": self.level,
+            "Exp": self.exp,
             "Attack": self.attack,
             "Health": self.health,
             "Armor": self.armor,
@@ -39,11 +42,25 @@ class BaseCharacter:
     @property
     def armor(self):
         return self._armor
+    @property
+    def exp(self):
+        return self._exp
+    @property
+    def max_exp(self):
+        return self._max_exp
     
     @level.setter
     def level(self, value):
         self._validate_negative_value(value, "Level")
         self._level = value
+    @exp.setter
+    def exp(self, value):
+        self._validate_negative_value(value, "Level")
+        self._exp = value
+    @max_exp.setter
+    def max_exp(self, value):
+        self._validate_negative_value(value, "Level")
+        self._max_exp = value
     @attack.setter
     def attack(self, value):
         self._validate_negative_value(value, "Attack")

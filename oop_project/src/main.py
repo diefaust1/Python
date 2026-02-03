@@ -1,5 +1,6 @@
 import subprocess, os, sys
 import character_classes as char_class
+import gameplay as gp
 
 class Commands:
 
@@ -18,6 +19,13 @@ class Commands:
         CHARACTER: "shows the characters stats",
         QUEST: "shows one of three quest that you can embark on"
     }
+
+    def progress_quest(self):
+        
+        quest = gp.Quest("On the hunt", 80)
+        
+        print("quest starts...")
+        print(quest._event)
     
     def character_stats(self, character: char_class.BaseCharacter):
         temp_dict = character.stats()
@@ -33,7 +41,7 @@ class Commands:
         command = "cls" if os.name == "nt" else "clear"
         subprocess.run(command, shell=True)
 
-    # Start of Game
+# Start of Game
 def main():
     #variables and objects
     command = Commands()
@@ -47,7 +55,7 @@ def main():
 
     while choose_class < 1 or choose_class > number_of_classes:
         try:
-            choose_class = int(input("Choose a class, write the number\n1) Peasant\n\n2) Knight\n\n3) Warrior\n"))
+            choose_class = int(input("Choose a class, write the number\n1) Peasant\n2) Knight\n3) Warrior\n"))
         except ValueError:
             print("Please enter a valid number")
             
@@ -84,8 +92,8 @@ def main():
                 else:
                     command.character_stats(character)
             
-            case "-gold":
-                print()
+            case command.QUEST:
+                command.progress_quest()
             
             case _:
                 print("command not found")
