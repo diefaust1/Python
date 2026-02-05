@@ -1,4 +1,5 @@
 import random
+import character_classes as char_class, enemies as enemy
 
 class Event:
     def __init__(self, type: str):
@@ -22,8 +23,15 @@ class Event:
         return event_cls()
 
 class Fight(Event):
-    def __init__(self) -> None:
+    def __init__(self, character: char_class.BaseCharacter, enemy: enemy.Creature) -> None:
         super().__init__("Fight")
+        self.character = character
+        self.enemy = enemy
+
+    @classmethod
+    def start_fight(cls, character: char_class.BaseCharacter, enemy: enemy.Creature):
+        pass
+
 
 class Delivery(Event):
     def __init__(self):
@@ -45,7 +53,3 @@ class Quest:
         @property
         def exp(self):
             return self._exp
-    
-
-
-
